@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/bragaus/.vim/plugged/vim-airline-themes/autoload'
-let g:netrw_dirhist_2='/home/bragaus/.vim/plugged/vim-airline-themes/autoload/airline'
-let g:netrw_dirhist_3='/home/bragaus/.vim/plugged/vim-airline-themes/autoload/airline/themes'
-let g:netrw_dirhist_4='/mnt/d/JavaScript/ProtejoPlanoArt/client/src/components/PaginaDeLogin'

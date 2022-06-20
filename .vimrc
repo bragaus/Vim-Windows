@@ -1,60 +1,113 @@
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab " largura do Tab ajustada para 4
-set number relativenumber " numeração
-set cursorline " acender linha
-set t_Co=256 " Solução para mostrar cores no vim rodando TMUX
-set so=999 " centralizar a linha no meio
+call plug#begin()
+" Tema
+Plug 'ntk148v/vim-horizon'
+Plug 'dracula/vim', {'as':'dracula'}
 
-let g:airline_powerline_fonts = 1 " exibir arrows no air-line do vim
-let g:airline#extensions#tabline#enabled = 1 " exibe tab com um unico arquivo aberto
-
-" status de modificação do arquivo no explorador de arquivos
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-
-syntax on " habilita o highlight de sintaxe
-
-"Exibir Explorador de arquivo com Ctrl + o
-map <C-o> :NERDTreeToggle<CR> 
-
-" Solução para completar automaticamente o diretorio com ctrl + x e ctrl + f 
-autocmd BufEnter * silent! lcd %:p:h
-
-
-call plug#begin('~/.vim/plugged')
-
-" Não preciso nem falar nada
+" AirLines
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Explorador de arquivos + icones
-Plug 'scrooloose/nerdtree'
+" NerdTree
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Icones
 Plug 'ryanoasis/vim-devicons'
 
-" Sintexe React
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mxw/vim-jsx'
+" Sintaxes
+Plug 'sheerun/vim-polyglot'
+Plug 'vobornik/vim-mql4'
 
-" Tema
-Plug 'ntk148v/vim-horizon'
-
-Plug 'dracula/vim',{'as':'dracula'}
+" Processadores
+Plug 'dense-analysis/ale'
 
 " Multiplos cursores
 Plug 'terryma/vim-multiple-cursors'
-
-Plug 'motemen/git-vim'
 call plug#end()
 
-" Tema
-colorscheme horizon 
+syntax on " Habilitar cores na sintaxe
+
+
+set number relativenumber " Habilitar numeros de linhas
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab " Ajustar largura do tab para 4 espaços        
+
+set cursorline " Habilitar cor na linha
+set so=999 " Centralizar linha
+
+set hidden           " Habilitar Abas para alternar entre arquivos abertos
+set scrolloff=8      " Numero de linhas abaixo do cursor
+set signcolumn=yes   " Adiciona uma linha vertical onde vai apontar linhas de codigo com erro 
+set cmdheight=2      " Mais espaço para mensagens do cmd
+set encoding=utf-8   " Para ativar icones de fonts
+set nobackup         " No backup files
+set nowritebackup    " No backup files
+set splitright       " Abrir novo arquivo na direita
+set splitbelow       " Abrir novo arquivo embaixo
+set mouse=a          " Habilitar suporte a mouse
+set t_Co=256         " Solução para funcionar tema no Windows Terminal
+
+set smarttab         
+set smartindent      
+set incsearch        
+set ignorecase       
+set smartcase        
+set updatetime=100   
+set autoread         
+set guifont=Hack\ NF
+
+filetype on          
+filetype plugin on   
+filetype indent on   
+
+" Temas
+colorscheme horizon "sonokai
+
+" Airline
+"let g:airline_theme = 'sonokai'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" NerdTree
+nmap <C-d> :NERDTreeToggle<CR>
+
+" Configurações para rodar bem no Windows
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
