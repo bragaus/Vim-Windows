@@ -29,14 +29,14 @@ call plug#end()
 syntax on " Habilitar cores na sintaxe
 
 
+set so=999 " Centralizar linha
 set number relativenumber " Habilitar numeros de linhas
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab " Ajustar largura do tab para 4 espaços        
 
 set cursorline " Habilitar cor na linha
-set so=999 " Centralizar linha
 
 set hidden           " Habilitar Abas para alternar entre arquivos abertos
-set scrolloff=8      " Numero de linhas abaixo do cursor
+"set scrolloff=8      " Numero de linhas abaixo do cursor
 set signcolumn=yes   " Adiciona uma linha vertical onde vai apontar linhas de codigo com erro 
 set cmdheight=2      " Mais espaço para mensagens do cmd
 set encoding=utf-8   " Para ativar icones de fonts
@@ -54,7 +54,7 @@ set ignorecase
 set smartcase        
 set updatetime=100   
 set autoread         
-set guifont=Hack\ NF
+set guifont=Hack\ NF:h17
 
 filetype on          
 filetype plugin on   
@@ -72,7 +72,7 @@ let g:airline_powerline_fonts = 1
 nmap <C-d> :NERDTreeToggle<CR>
 
 " Configurações para rodar bem no Windows
-source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
