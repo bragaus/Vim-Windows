@@ -26,8 +26,16 @@ Plug 'dense-analysis/ale'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
-syntax on " Habilitar cores na sintaxe
+" Fonte e tamanho
+set guifont=Hack\ NF:h10
 
+" Solução para abrir Gvim em modo tela cheia
+au GUIEnter * simalt ~x
+set lines=999 
+set columns=999
+
+" Habilitar cores na sintaxe
+syntax on 
 
 set so=999 " Centralizar linha
 set number relativenumber " Habilitar numeros de linhas
@@ -36,9 +44,8 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab " Ajustar largura do tab para
 set cursorline " Habilitar cor na linha
 
 set hidden           " Habilitar Abas para alternar entre arquivos abertos
-"set scrolloff=8      " Numero de linhas abaixo do cursor
 set signcolumn=yes   " Adiciona uma linha vertical onde vai apontar linhas de codigo com erro 
-set cmdheight=2      " Mais espaço para mensagens do cmd
+set cmdheight=1      " Mais espaço para mensagens do cmd
 set encoding=utf-8   " Para ativar icones de fonts
 set nobackup         " No backup files
 set nowritebackup    " No backup files
@@ -54,7 +61,6 @@ set ignorecase
 set smartcase        
 set updatetime=100   
 set autoread         
-set guifont=Hack\ NF:h17
 
 filetype on          
 filetype plugin on   
