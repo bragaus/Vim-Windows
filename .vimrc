@@ -81,7 +81,7 @@ nmap <silent> <S-F12> :bp<CR>
 nmap <A-s> :Git status<CR>
 nmap <A-a> :Git add .<CR>
 nmap <A-c> :Git commit<CR>
-nmap <A-p> :Git push origin master <CR>
+nmap <A-p> :Git push<CR>
 
 " Airline
 let g:airline#extensions#tabline#fnamemod = ':t' " Mostrar apenas o nome no titulo do buffer aberto
