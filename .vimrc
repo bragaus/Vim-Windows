@@ -27,10 +27,13 @@ Plug 'terryma/vim-multiple-cursors'
 
 " Relembrar os arquivos abertos quando fechar o vim e abrir novamente
 Plug 'abdalrahman-ali/vim-remembers'
+
+" Git
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
-set guioptions -=m 
-set guioptions -=T
+set guioptions-=m 
+set guioptions-=T
 set guioptions=Ace
 
 " Tema
@@ -75,11 +78,19 @@ nmap <C-k> :BufOnly<CR>
 nmap <silent> <F12> :bn<CR>
 nmap <silent> <S-F12> :bp<CR>
 
+nmap <A-s> :Git status<CR>
+nmap <A-a> :Git add .<CR>
+nmap <A-c> :Git commit<CR>
+nmap <A-p> :Git push origin master <CR>
+
 " Airline
 let g:airline#extensions#tabline#fnamemod = ':t' " Mostrar apenas o nome no titulo do buffer aberto
 let g:airline#extensions#tabline#enabled = 1 " Mostrar extensões no titulo do buffer aberto
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = 1
+
+" Mostrar linha escondida 
+let NERDTreeShowHidden=1
 
 " Configurações para rodar bem no Windows
 source $VIMRUNTIME/mswin.vim
