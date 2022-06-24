@@ -38,7 +38,7 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'pnetherwood/mql4-dev'
 call plug#end()
-
+"
 " Retirar Menus e Scroll do Gvim
 set guioptions-=m 
 set guioptions-=T
