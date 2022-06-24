@@ -30,6 +30,13 @@ Plug 'abdalrahman-ali/vim-remembers'
 
 " Git
 Plug 'tpope/vim-fugitive'
+
+" Compilador
+Plug 'tpope/vim-dispatch'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/OmniCppComplete'
+Plug 'pnetherwood/mql4-dev'
 call plug#end()
 
 " Retirar Menus e Scroll do Gvim
@@ -54,6 +61,7 @@ filetype indent on
 " Cor do cursor
 hi Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=purple gui=bold
 
+" Cor da linha selecionada
 hi Visual  guifg=#000000 guibg=#FFFFFF gui=bold
 
 set guifont=Hack\ NF:h12 " Fonte e tamanho
@@ -84,6 +92,7 @@ nmap <C-k> :BufOnly<CR>
 nmap <silent> <F12> :bn<CR>
 nmap <silent> <S-F12> :bp<CR>
 
+" Git
 nmap <A-s> :Git status<CR>
 nmap <A-a> :Git add .<CR>
 nmap <A-c> :Git commit<CR>
