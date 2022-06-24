@@ -32,6 +32,7 @@ Plug 'abdalrahman-ali/vim-remembers'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
+" Retirar Menus e Scroll do Gvim
 set guioptions-=m 
 set guioptions-=T
 set guioptions=Ace
@@ -49,6 +50,11 @@ syntax on
 filetype on
 filetype plugin on   
 filetype indent on
+
+" Cor do cursor
+hi Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=purple gui=bold
+
+hi Visual  guifg=#000000 guibg=#FFFFFF gui=bold
 
 set guifont=Hack\ NF:h12 " Fonte e tamanho
 set nowrap " Não quebrar linhas longas
