@@ -37,8 +37,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'pnetherwood/mql4-dev'
+
 call plug#end()
 "
+set foldmethod=indent
+
 " Retirar Menus e Scroll do Gvim
 set guioptions-=m 
 set guioptions-=T

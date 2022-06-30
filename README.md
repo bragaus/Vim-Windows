@@ -8,6 +8,15 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
 
 ## Comandos uteis
+
 ### Sincronizar scroll entre telas divididas
 :set scrollbind
 :set scrollopt+=hor
+
+### Dividir buffer em tela
+:sb#
+:vert sb#
+
+### Folding
+:zc
+:zo
