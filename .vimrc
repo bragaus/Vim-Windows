@@ -33,13 +33,15 @@ Plug 'tpope/vim-fugitive'
 
 " Compilador
 Plug 'tpope/vim-dispatch'
+
 "Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'pnetherwood/mql4-dev'
 
+Plug 'mhinz/vim-startify'
 call plug#end()
-"
+
 set foldmethod=indent
 
 " Retirar Menus e Scroll do Gvim
