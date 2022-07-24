@@ -1,10 +1,13 @@
 call plug#begin()
 
-""""""
+" linhas na indentação
 Plug 'Yggdroot/indentLine'
+
+" Ctrl+P para abrir arquivos do diretorio atual 
 Plug 'ctrlpvim/ctrlp.vim'
+
+" HTML sugar
 Plug 'mattn/emmet-vim'
-"""""""
 
 " Tema
 Plug 'ntk148v/vim-horizon'
@@ -57,26 +60,6 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --producti
 
 call plug#end()
 
-""""""""""""
-set autoindent
-set smartindent
-
-" Iniciar o vim com os traços de indentação na coluna
-let g:indentLine_enabled = 1
-
-" Ativar/Desativar traços de indentação na coluna com Ctrl+k+i
-map <A-k>i :IndentLinesToggle<cr>
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip)$'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_show_hidden = 1
-
-let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
-map cc <Plug>NERDCommenterInvert
-map cs <Plug>NERDCommenterSexy
-""""""""""""""""
-
 " Tema
 colorscheme dracula
 
@@ -104,6 +87,9 @@ set foldmethod=indent
 set guioptions-=m
 set guioptions-=T
 set guioptions=Ace
+
+set autoindent
+set smartindent
 
 set guifont=Hack\ NF:h12 " Fonte e tamanho
 set nowrap " Não quebrar linhas longas
@@ -143,8 +129,16 @@ nmap <C-r> :NERDTreeRefreshRoot<CR>
 " Fechar todas as janelas menos a atual
 nmap <C-k> :BufOnly<CR>
 
+nmap <F10> :ALEFix<CR>
+
 " Atalho para abrir o Terminal
 map <c-t> :bel term ++rows=12<cr>
+
+" Ativar/Desativar traços de indentação na coluna com Ctrl+k+i
+map <A-k>i :IndentLinesToggle<cr>
+
+map cc <Plug>NERDCommenterInvert
+map cs <Plug>NERDCommenterSexy
 
 " Airline
 let g:airline#extensions#tabline#fnamemod = ':t' " Mostrar apenas o nome no titulo do buffer aberto
@@ -164,7 +158,18 @@ let g:ale_sign_warning ='-'
 let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_completion_enabled = 0
 let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
-nmap <F10> :ALEFix<CR>
+
+" Iniciar o vim com os traços de indentação na coluna
+let g:indentLine_enabled = 1
+
+" Configs do CTRL+P
+let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip)$'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_show_hidden = 1
+
+" Configs do nerd commenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
 
 " Configurações para rodar bem no Windows
 source $VIMRUNTIME/mswin.vim
