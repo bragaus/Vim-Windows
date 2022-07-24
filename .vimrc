@@ -2,6 +2,8 @@ call plug#begin()
 
 """"""
 Plug 'Yggdroot/indentLine'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/emmet-vim'
 """""""
 
 " Tema
@@ -41,7 +43,6 @@ Plug 'pnetherwood/mql4-dev'
 " O Plugin mais amorzinho de todos
 Plug 'mhinz/vim-startify'
 
-" VUE
 "Plug 'posva/vim-vue'
 Plug 'storyn26383/vim-vue'
 
@@ -66,6 +67,14 @@ let g:indentLine_enabled = 1
 " Ativar/Desativar traços de indentação na coluna com Ctrl+k+i
 map <A-k>i :IndentLinesToggle<cr>
 
+let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip)$'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_show_hidden = 1
+
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+map cc <Plug>NERDCommenterInvert
+map cs <Plug>NERDCommenterSexy
 """"""""""""""""
 
 " Tema
@@ -152,9 +161,11 @@ let g:NERDTreeStatusline = ''
 " ALE
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning ='-'
-let g:ale_fix_on_save = 1
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_completion_enabled = 0
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+nmap <F10> :ALEFix<CR>
 
 " Configurações para rodar bem no Windows
 source $VIMRUNTIME/mswin.vim
 behave mswin
-
