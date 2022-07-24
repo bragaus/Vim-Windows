@@ -1,4 +1,9 @@
 call plug#begin()
+
+""""""
+Plug 'Yggdroot/indentLine'
+"""""""
+
 " Tema
 Plug 'ntk148v/vim-horizon'
 Plug 'dracula/vim', {'as':'dracula'}
@@ -25,7 +30,7 @@ Plug 'dense-analysis/ale'
 Plug 'terryma/vim-multiple-cursors'
 
 " Relembrar os arquivos abertos quando fechar o vim e abrir novamente
-Plug 'abdalrahman-ali/vim-remembers'
+" Plug 'abdalrahman-ali/vim-remembers'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -50,6 +55,18 @@ Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
 call plug#end()
+
+""""""""""""
+set autoindent
+set smartindent
+
+" Iniciar o vim com os traços de indentação na coluna
+let g:indentLine_enabled = 1
+
+" Ativar/Desativar traços de indentação na coluna com Ctrl+k+i
+map <A-k>i :IndentLinesToggle<cr>
+
+""""""""""""""""
 
 " Tema
 colorscheme dracula
@@ -97,22 +114,25 @@ set t_Co=256 " Solução para funcionar tema no Windows Terminal
 set lines=999 " Altura da janela sem estar maximizada
 set columns=999 " Largura da janela sem estar maximizada
 
-" NerdTrre
-nmap <C-d> :NERDTreeToggle<CR>
-nmap <C-r> :NERDTreeRefreshRoot<CR>
-
-" Fechar todas as janelas menos a atual
-nmap <C-k> :BufOnly<CR>
-
-" Ir para proxima/anterior janela
-nmap <silent> <F12> :bn<CR>
-nmap <silent> <S-F12> :bp<CR>
-
 " Git
 nmap <A-s> :Git status<CR>
 nmap <A-a> :Git add .<CR>
 nmap <A-c> :Git commit<CR>
 nmap <A-p> :Git push<CR>
+
+" Ir para proxima/anterior janela
+nmap <A-Right> :bn<CR>
+nmap <A-Left> :bp<CR>
+nmap <A-x> :bd!<CR>
+
+nmap <A-k>s :Startify<CR>
+
+" NerdTree
+nmap <C-d> :NERDTreeToggle<CR>
+nmap <C-r> :NERDTreeRefreshRoot<CR>
+
+" Fechar todas as janelas menos a atual
+nmap <C-k> :BufOnly<CR>
 
 " Atalho para abrir o Terminal
 map <c-t> :bel term ++rows=12<cr>
@@ -138,38 +158,3 @@ let g:ale_fix_on_save = 1
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-if &diffopt !~# 'internal'
-  set diffexpr=MyDiff()
-endif
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
